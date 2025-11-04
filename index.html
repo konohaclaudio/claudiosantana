@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Portfólio de Claudio Santana, Analista de Sistemas, Desenvolvedor Full Stack e Android Developer.">
+    <meta name="author" content="Claudio Santana">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+    <title>Portfólio | Claudio Santana</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/fullpage.min.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        /* Estilos gerais do currículo */
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+        .skills-row ul { text-align: left; padding-left: 15px; }
+        .skills-row ul li { margin-bottom: 10px; line-height: 1.4; }
+        .skills-row ul li i { margin-right: 8px; color: #fff; width: 15px; text-align: center; }
+        .price-box { text-align: left; padding: 25px; height: 100%; background-color: rgba(0, 0, 0, 0.15); border-radius: 10px; display: flex; flex-direction: column; }
+        .price-box h3 { text-align: center; min-height: 50px; }
+        
+        /* Alinhamento de ícones (Slides 04, 09) */
+        .price-box .service-icon { 
+            display: block; 
+            margin: 0 auto 20px auto; 
+            text-align: center; /* Garante que o <i> dentro do span esteja centralizado */
+        }
+        
+        .price-box ul { padding-left: 10px; flex-grow: 1; }
+        .price-box ul li { margin-bottom: 8px; }
+        .service-box p { font-size: 14px; }
+        .portfolio-item .thumb-inner p { text-align: left; }
+        .skills-table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        .skills-table th, .skills-table td { border: 1px solid rgba(255, 255, 255, 0.2); padding: 12px; text-align: left; }
+        .skills-table th { background-color: rgba(0, 0, 0, 0.3); font-weight: 500; }
+        .skills-table td { font-size: 14px; }
+
+        /* Estilos para a lista de Soft Skills (Slide 07) */
+        .soft-skills-list {
+            column-count: 2;
+            column-gap: 40px;
+            text-align: left;
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+        .soft-skills-list li {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            break-inside: avoid-column;
+        }
+        /* Ícones em BRANCO (Solicitação anterior) */
+        .soft-skills-list i {
+            margin-right: 10px;
+            color: #ffffff; /* Cor branca */
+            width: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 767px) {
+            .soft-skills-list {
+                column-count: 1;
+            }
+        }
+
+        /* Estilos da animação de introdução */
+        #slide01 .section-inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0F1914;
+        }
+
+        #matrix-canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .welcome-box {
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            text-align: center;
+        }
+        
+        .welcome-box > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .welcome-box .welcome-text-group {
+            opacity: 0;
+            transform: scale(1.1);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+
+        .welcome-box.visible {
+            opacity: 1;
+        }
+
+        .welcome-box .visible {
+            opacity: 1;
+            transform: translateY(0) scale(1); /* Resetando transformações para visibilidade */
+        }
+        
+        .welcome-box .welcome-text-group.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .welcome-box .welcome-first {
+             font-family: 'Roboto Mono', monospace;
+             font-size: 1.5rem;
+             font-weight: 300;
+        }
+
+        .welcome-box .welcome-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4vw; /* Ajustado */
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin: 10px 0;
+            position: relative;
+            color: #fff;
+        }
+
+        /* Glitch */
+        .glitch-effect { animation: glitch 1s linear infinite; }
+        .glitch-effect::before, .glitch-effect::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0F1914; overflow: hidden; }
+        .glitch-effect::before { left: 2px; text-shadow: -2px 0 #ff00c1; animation: glitch-anim-1 2s linear infinite reverse; }
+        .glitch-effect::after { left: -2px; text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1; animation: glitch-anim-2 2s linear infinite reverse; }
+        @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-3px, 3px); } 40% { transform: translate(-3px, -3px); } 60% { transform: translate(3px, 3px); } 80% { transform: translate(3px, -3px); } 100% { transform: translate(0); } }
+        @keyframes glitch-anim-1 { 0%, 100% { clip-path: inset(0 0 95% 0); } 25% { clip-path: inset(25% 0 50% 0); } 50% { clip-path: inset(50% 0 10% 0); } 75% { clip-path: inset(75% 0 5% 0); } }
+        @keyframes glitch-anim-2 { 0%, 100% { clip-path: inset(95% 0 0 0); } 25% { clip-path: inset(50% 0 25% 0); } 50% { clip-path: inset(10% 0 50% 0); } 75% { clip-path: inset(5% 0 75% 0); } }
+
+        .scroll-down.next-section {
+            position: absolute;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Efeito hover scramble */
+        .welcome-first, .welcome-title {
+            position: relative;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .welcome-first:hover, .welcome-title:hover {
+            color: #33FF77;
+        }
+        
+        /* =========== CSS PARA EFEITO DE CLIQUE E LOGO =========== */
+        #logo-image {
+            display: none; /* Começa escondido */
+            max-width: 500px; /* Ajuste o tamanho máximo do seu logo */
+            width: 100%;
+            margin: 20px auto; /* Centraliza e dá espaço */
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        #logo-image.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .welcome-text-group.hidden {
+            opacity: 0;
+            pointer-events: none; /* Desativa eventos de mouse no texto quando escondido */
+            transform: scale(1.2);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        /* =========== FIM DO CSS PARA EFEITO DE CLIQUE E LOGO =========== */
+
+        /* Estilos do parallax (slide05) */
+        #slide05 { position: relative; overflow: hidden; background-color: #0F1914; }
+        /* O slide 05 agora só tem 1 view, mas mantém o BG Parallax */
+        #slide05 .section-inner { position: relative; z-index: 2; background: rgba(15, 25, 20, 0.75); padding: 50px 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .parallax-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('fundo.png'); background-attachment: fixed; background-position: center center; background-repeat: no-repeat; background-size: cover; z-index: 1; filter: brightness(0.7) grayscale(0.2); }
+        #slide05 .title-block h2, #slide05 .title-block span { color: #ffffff; }
+        #slide05 .skills-table th, #slide05 .skills-table td { color: #ffffff; border-color: rgba(255, 255, 255, 0.3); }
+        #slide05 .skills-table th { background-color: rgba(0, 0, 0, 0.5); }
+        
+        /* Novo Estilo para a Notificação de Carrossel (Cor Ajustada) */
+        .carousel-hint {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7); /* Branco/Cinza Claro para melhor harmonia */
+            margin-top: 15px;
+            text-align: center;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 400; 
+        }
+
+        
+        /* Estilos para a nova seção de Toolkit Detalhado (slide06) */
+        .toolkit-section { background-color: #0f1914; padding: 60px 0; }
+        .toolkit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 20px; justify-items: center; max-width: 1200px; margin: 0 auto; }
+        .toolkit-card {
+            background-color: #182820;
+            padding: 15px;
+            border-radius: 10px;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        .toolkit-card:hover {
+            transform: scale(1.08);
+            background-color: #203a2a;
+            box-shadow: 0 0 25px rgba(51, 255, 119, 0.3); /* Sombra neon */
+        }
+        .toolkit-card img { height: 40px; margin-bottom: 5px; filter: grayscale(100%); transition: filter 0.5s; }
+        .toolkit-card:hover img { filter: grayscale(0%); }
+        .toolkit-card p { color: #ffffff; font-size: 13px; font-weight: 600; text-align: center; }
+        .toolkit-card span.category {
+            position: absolute;
+            bottom: -15px;
+            font-size: 9px;
+            color: #33FF77;
+            text-transform: uppercase;
+            font-weight: bold;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        .toolkit-card:hover span.category { opacity: 1; bottom: 5px; }
+
+        
+        /* Estilos para o Conceito Konoha Tech (Slide 11 - REMOVIDO) */
+        #slide11 { display: none; }
+
+
+        /* Custom Cursor - BASE EFEITO GLOW */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            border-radius: 50%;
+            z-index: 9999;
+            mix-blend-mode: exclusion; 
+            transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, transform 0.1s linear;
+        }
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #33FF77;
+        }
+        .cursor-outline {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #33FF77;
+        }
+        
+        .cursor-dot, .cursor-outline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* ======== ESTILOS PARA NAVEGAÇÃO DOS CARROSSÉIS (SETAS) ======== */
+        .services-section, .gallery-section {
+            position: relative; 
+            padding-left: 0; 
+            padding-right: 0;
+        }
+
+        .services-list.owl-carousel, .gallery-list.owl-carousel {
+            padding-left: 40px; 
+            padding-right: 40px;
+            position: relative; 
+            z-index: 2; 
+        }
+        
+        .services-list.owl-carousel .owl-nav,
+        .gallery-list.owl-carousel .owl-nav {
+            margin-top: 0;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            width: 100%; 
+            left: 0;
+            transform: translateY(-50%);
+            pointer-events: none; 
+            z-index: 10;
+        }
+        
+        .services-list.owl-carousel .owl-nav button,
+        .gallery-list.owl-carousel .owl-nav button {
+            pointer-events: auto; 
+            z-index: 11;
+            background: #33FF77 !important;
+            color: #000 !important;
+            border: none !important;
+            font-size: 20px !important;
+            width: 40px !important;
+            height: 40px !important;
+            line-height: 40px !important;
+            border-radius: 50% !important;
+            position: absolute;
+            opacity: 0.9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s;
+        }
+
+        /* Posicionamento final das setas */
+        .services-list.owl-carousel .owl-nav .owl-prev,
+        .gallery-list.owl-carousel .owl-nav .owl-prev { 
+            left: 0; 
+        }
+        
+        .services-list.owl-carousel .owl-nav .owl-next,
+        .gallery-list.owl-carousel .owl-nav .owl-next { 
+            right: 0; 
+        }
+
+        .services-list.owl-carousel .owl-nav button:hover,
+        .gallery-list.owl-carousel .owl-nav button:hover {
+            background: #11EE55 !important;
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .services-list.owl-carousel .owl-nav button span,
+        .gallery-list.owl-carousel .owl-nav button span { display: none; }
+
+        @media (max-width: 992px) {
+            .services-list.owl-carousel, .gallery-list.owl-carousel {
+                padding-left: 0; 
+                padding-right: 0;
+            }
+            .services-list.owl-carousel .owl-nav,
+            .gallery-list.owl-carousel .owl-nav {
+                 top: calc(100% + 10px); 
+                 width: 100%;
+                 left: 0;
+                 position: relative; 
+            }
+            .services-list.owl-carousel .owl-nav button,
+            .gallery-list.owl-carousel .owl-nav button {
+                position: static;
+                margin: 0 5px;
+            }
+        }
+        /* Estilo dos novos botões em Slide 02 e Slide 08 */
+        .button-group {
+            text-align: left; /* Alinha os botões à esquerda do about-contentbox */
+            margin-top: 25px;
+        }
+        .text-center .btn.detailed-cv {
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+        .button-group .btn {
+            display: inline-block;
+            font-weight: 500;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .button-group .btn-secondary-custom {
+            background-color: transparent;
+            border: 1px solid #fff;
+            color: #ffffff;
+            margin-left: 15px;
+        }
+        .button-group .btn-secondary-custom:hover {
+            background-color: #ffffff;
+            color: #0F1914;
+        }
+        
+        /* Ajuste para o layout dos botões em Perfil Profissional (slide02) */
+        @media (max-width: 992px) {
+            .button-group {
+                 text-align: center; 
+                 display: flex;
+                 flex-wrap: wrap;
+                 justify-content: center;
+                 align-items: center;
+            }
+             .button-group a {
+                margin: 5px 10px !important;
+             }
+        }
+        
+        /* Ajuste para o novo botão na segunda linha em mobile */
+        @media (max-width: 576px) {
+            .button-group a {
+                display: block;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            .button-group {
+                text-align: center; 
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="devtools-alert-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); color: #fff; z-index: 99999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <h1 style="color: #ff3377;">Atenção!</h1>
+        <p style="font-size: 1.2rem;">Por favor, feche as Ferramentas de Desenvolvedor (DevTools) para continuar a visualização.</p>
+        <p style="font-size: 0.8rem; margin-top: 20px; color: #aaa;">Esta é uma medida de segurança para proteger o código-fonte.</p>
+    </div>
+    <div id="video">
+        <div class="preloader">
+            <div class="preloader-bounce"><span></span><span></span><span></span></div>
+        </div>
+
+        <header id="header">
+            <div class="container-fluid">
+                <div class="navbar">
+                    <a href="#slide01" id="logo" title="Claudio Santana">C.S.J.</a>
+           <div class="navigation-row">
+    <nav id="navigation" aria-label="Menu de Navegação Principal">
+        <button type="button" class="navbar-toggle" aria-label="Abrir Menu"><i class="fa fa-bars"></i></button>
+        <div class="nav-box navbar-collapse">
+            <ul class="navigation-menu nav navbar-nav navbars" id="nav">
+                <li data-menuanchor="slide01" class="active"><a href="#slide01">Início</a></li>
+                <li data-menuanchor="slide02"><a href="#slide02">Sobre Mim</a></li>
+                <li data-menuanchor="slide03"><a href="#slide03">Expertise</a></li>
+                <li data-menuanchor="slide04"><a href="#slide04">Especialidades</a></li>
+                <li data-menuanchor="slide05"><a href="#slide05">Habilidades</a></li>
+                <li data-menuanchor="slide06"><a href="#slide06">Toolkit</a></li>
+                <li data-menuanchor="slide07"><a href="#slide07">Soft Skills</a></li>
+                <li data-menuanchor="slide08"><a href="#slide08">Experiência</a></li>
+                <li data-menuanchor="slide09"><a href="#slide09">Formação</a></li>
+                <li data-menuanchor="slide10"><a href="#slide10">Projetos</a></li>
+                <li data-menuanchor="slide12"><a href="#slide12">Contato</a></li>    
+            </ul>
+        </div>
+    </nav>
+</div>
+                </div>
+            </div>
+        </header>
+
+        <div id="fullpage" class="fullpage-default">
+            
+            <div class="section animated-row" data-section="slide01" id="slide01">
+                <div class="section-inner">
+                    <canvas id="matrix-canvas"></canvas>
+                    <div class="welcome-box">
+                        <div class="welcome-text-group">
+                            <span class="welcome-first" data-text-original="Claudio Santana">Claudio Santana</span>
+                            <h1 class="welcome-title" data-text-original="Full Stack | Android Developer">Full Stack | Android Developer</h1>
+                        </div>
+                        
+                        <img src="images/logo.png" alt="Logotipo Conceitual" id="logo-image">
+
+                        <p>Com foco em soluções escaláveis, interfaces modernas e código limpo. Combino engenharia, design e estratégia para criar experiências digitais completas e funcionais.</p>
+                        
+                        <a href="#slide03" class="btn">Conheça meu trabalho</a>
+                        <div class="scroll-down next-section" style="margin-top: 25px;"><img src="images/mouse-scroll.png" alt="Ícone de um mouse"><span>Role para Baixo</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section animated-row" data-section="slide02">
+                <div class="section-inner">
+                    <div class="about-section">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8 wide-col-laptop">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="about-contentbox">
+                                            <div class="animate" data-animate="fadeInUp">
+                                                <h2>Perfil Profissional</h2>
+                                                <p>
+                                                    Atuo como Analista de Sistemas e Desenvolvedor Mobile Nativo (Kotlin/Java), sempre com uma mentalidade Full Stack. Minha paixão é construir produtos digitais robustos, participando de todo o ciclo, desde a concepção da API até a interface final no aplicativo.
+                                                </p>
+                                                <p>
+                                                    Meu destaque profissional inclui a participação direta no desenvolvimento e na internacionalização do aplicativo VO MOBILE (Grupo Hinode). Esta plataforma de alto volume ultrapassou a marca de 110.000 downloads.
+                                                </p>
+                                            </div>
+                                            <div class="facts-list owl-carousel">
+                                                <div class="item animate" data-animate="fadeInUp">
+                                                    <div class="counter-box">
+                                                        <i class="fa fa-download counter-icon" aria-hidden="true"></i><span class="count-number">110</span>+ Mil Downloads em Apps
+                                                    </div>
+                                                </div>
+                                                <div class="item animate" data-animate="fadeInUp">
+                                                    <div class="counter-box">
+                                                        <i class="fa fa-paint-brush counter-icon" aria-hidden="true"></i>Expertise Híbrida<br><small style="font-size: 13px; font-weight: 300;">Engenharia + Design</small>
+                                                    </div>
+                                                </div>
+                                                <div class="item animate" data-animate="fadeInUp">
+                                                    <div class="counter-box">
+                                                        <i class="fa fa-desktop counter-icon" aria-hidden="true"></i><span class="count-number">6</span>+ Anos de Experiência
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="button-group animate" data-animate="fadeInUp" style="margin-top: 25px;">
+                                                <a href="#slide08" class="btn">Ver Experiência</a>
+                                                <a href="curriculoporftolio.html" target="_blank" class="btn btn-secondary-custom">Ver CV Detalhado</a>
+                                                <a href="curriculoclaudio.pdf" download class="btn btn-secondary-custom" style="margin-left: 15px;">Baixar CV (PDF)</a>
+                                            </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <figure class="about-img animate" data-animate="fadeInUp"><img src="perfil.jpg" class="rounded" alt="Foto de perfil de Claudio Santana"></figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animated-row" data-section="slide03">
+                <div class="section-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 wide-col-laptop">
+                            <div class="title-block animate" data-animate="fadeInUp">
+                                <span>Minha Expertise</span>
+                                <h2>Creative Development</h2>
+                                <p class="carousel-hint">← Arraste ou use as setas nas laterais para ver todas as especialidades →</p>
+                            </div>
+                            <div class="services-section">
+                                <div class="services-list owl-carousel">
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box">
+                                            <span class="service-icon"><i class="fa fa-code" aria-hidden="true"></i></span>
+                                            <h3>Desenvolvimento Full Stack</h3>
+                                            <p>Desenvolvimento de aplicações web e mobile utilizando PHP, Laravel, Kotlin e React. Foco em performance, arquitetura escalável e experiência do usuário.</p>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box">
+                                            <span class="service-icon"><i class="fa fa-paint-brush" aria-hidden="true"></i></span>
+                                            <h3>UI/UX Design & Branding</h3>
+                                            <p>Planejamento e criação de interfaces que equilibram estética e funcionalidade, traduzindo a identidade visual de produtos e marcas em experiências digitais.</p>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box">
+                                            <span class="service-icon"><i class="fa fa-share-square" aria-hidden="true"></i></span>
+                                            <h3>Integrações e APIs</h3>
+                                            <p>Criação e integração de APIs RESTful, implementando boas práticas de arquitetura e segurança para soluções robustas e conectadas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section animated-row" data-section="slide04">
+                <div class="section-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-md-11 wide-col-laptop">
+                            <div class="title-block animate" data-animate="fadeInUp">
+                                <span>Minhas Especialidades</span>
+                                <h2>Do design à implementação</h2>
+                                <p>Meu trabalho combina engenharia de software e design para entregar soluções completas — do conceito à execução. Desenvolvo interfaces, sistemas e identidades digitais com foco em performance, experiência do usuário e resultado real.</p>
+                                <p class="carousel-hint">← Arraste ou use as setas para ver todos os serviços →</p>
+                            </div>
+                            <div class="services-section">
+                                <div class="services-list owl-carousel">
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <span class="service-icon"><i class="fa fa-paint-brush" aria-hidden="true"></i></span>
+                                            <h3>Identidade Visual & UI Design</h3>
+                                            <p>Crio interfaces e identidades visuais com propósito, transformando ideias em produtos digitais consistentes, modernos e intuitivos.</p>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <span class="service-icon"><i class="fa fa-camera-retro" aria-hidden="true"></i></span>
+                                            <h3>Social Media Kit & Branding Digital</h3>
+                                            <p>Desenvolvimento de kits visuais e materiais personalizados que mantêm a coerência estética e fortalecem a presença digital de marcas e profissionais.</p>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <span class="service-icon"><i class="fa fa-bolt" aria-hidden="true"></i></span>
+                                            <h3>Automação e Integração</h3>
+                                            <p>Crio soluções para conectar sistemas, otimizar processos e automatizar tarefas repetitivas, unindo produtividade e tecnologia.</p>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <span class="service-icon"><i class="fa fa-laptop" aria-hidden="true"></i></span>
+                                            <h3>Websites & E-commerce</h3>
+                                            <p>Desenvolvimento de sites e lojas virtuais de alta performance, com código limpo, responsividade e foco total na experiência do usuário.</p>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <span class="service-icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                            <h3>Sistemas & Dashboards Personalizados</h3>
+                                            <p>Projeto e implemento sistemas sob medida — como painéis administrativos, automações e integrações com APIs — para otimizar fluxos e reduzir gargalos.</p>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <span class="service-icon"><i class="fa fa-print" aria-hidden="true"></i></span>
+                                            <h3>Design e Materiais Impressos</h3>
+                                            <p>Transformo identidades digitais em soluções físicas com impacto visual e profissionalismo, como cartões, catálogos e materiais promocionais.</p>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <span class="service-icon"><i class="fa fa-wrench" aria-hidden="true"></i></span>
+                                            <h3>Manutenção e Suporte Técnico</h3>
+                                            <p>Ofereço acompanhamento contínuo e otimização de performance, garantindo segurança, estabilidade e evolução de sistemas e sites já em produção.</p>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <span class="service-icon"><i class="fa fa-line-chart" aria-hidden="true"></i></span>
+                                            <h3>Consultoria e Estratégia Digital</h3>
+                                            <p>Analiso necessidades técnicas e proponho soluções que alinham design, tecnologia e negócio, com foco em crescimento e inovação.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animated-row" data-section="slide05" id="slide05">
+                <div class="parallax-bg"></div>
+                <div class="section-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 wide-col-laptop">
+                            <div class="title-block animate" data-animate="fadeInUp">
+                                <span>Minha Stack</span>
+                                <h2>Tecnologias que Domino</h2>
+                                <p>Tecnologias e ferramentas que utilizo no desenvolvimento de soluções completas — da prototipação ao deploy.</p>
+                            </div>
+                            <div class="skills-row animate" data-animate="fadeInDown">
+                                <table class="skills-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Categoria</th>
+                                            <th>Tecnologias e Conceitos</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Linguagens & Frameworks</strong></td>
+                                            <td>Kotlin, Java, PHP, Laravel, JavaScript, React (Aprimorando), Node.js (Aprimorando), Android SDK, Jetpack Compose</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Bancos de Dados</strong></td>
+                                            <td>PostgreSQL, MySQL, Firebase, SQLite, SQL</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>APIs & Arquitetura</strong></td>
+                                            <td>RESTful APIs, MVVM, MVC, Design Patterns</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>UI/Estilização & Experiência</strong></td> 
+                                            <td>HTML5, CSS3, Bootstrap, Tailwind CSS, Material UI, Styled Components, fullPage.js</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Ferramentas Dev/Design</strong></td>
+                                            <td>Figma, Git, GitHub, Android Studio, VS Code, Photoshop, Canva</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Metodologias</strong></td>
+                                            <td>Metodologias Ágeis, Scrum, Kanban</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animated-row toolkit-section" data-section="slide06" id="slide06">
+                <div class="section-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-md-11 wide-col-laptop">
+                            <div class="title-block animate" data-animate="fadeInUp">
+                                <span>Meu Arsenal</span>
+                                <h2>Meu Toolkit Detalhado</h2>
+                                <p>Tecnologias e ferramentas que utilizo no desenvolvimento de soluções completas — da prototipação ao deploy.</p>
+                            </div>
+                            <div class="toolkit-grid animate" data-animate="fadeInDown">
+                                <div class="toolkit-card" title="Linguagens">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
+                                    <p>Kotlin</p>
+                                    <span class="category">Linguagens</span>
+                                </div>
+                                <div class="toolkit-card" title="Linguagens">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                                    <p>Java</p>
+                                    <span class="category">Linguagens</span>
+                                </div>
+                                <div class="toolkit-card" title="Linguagens">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
+                                    <p>PHP</p>
+                                    <span class="category">Linguagens</span>
+                                </div>
+                                <div class="toolkit-card" title="Linguagens Frontend">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                                    <p>JavaScript</p>
+                                    <span class="category">Linguagens</span>
+                                </div>
+                                <div class="toolkit-card" title="Framework/Lib JS">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                                    <p>React (Aprimorando)</p>
+                                    <span class="category">Estudando</span>
+                                </div>
+                                <div class="toolkit-card" title="Backend JS">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                                    <p>Node.js (Aprimorando)</p>
+                                    <span class="category">Estudando</span>
+                                </div>
+                                <div class="toolkit-card" title="Frontend/Estilização">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+                                    <p>CSS3</p>
+                                    <span class="category">Frontend</span>
+                                </div>
+                                <div class="toolkit-card" title="Frameworks">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" alt="Laravel">
+                                    <p>Laravel</p>
+                                    <span class="category">Frameworks</span>
+                                </div>
+                                <div class="toolkit-card" title="Mobile">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android SDK">
+                                    <p>Android SDK</p>
+                                    <span class="category">Mobile</span>
+                                </div>
+                                <div class="toolkit-card" title="Mobile">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jetpackcompose/jetpackcompose-original.svg" alt="Jetpack Compose">
+                                    <p>Jetpack Compose</p>
+                                    <span class="category">Mobile</span>
+                                </div>
+                                <div class="toolkit-card" title="Banco de Dados">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+                                    <p>PostgreSQL</p>
+                                    <span class="category">DB</span>
+                                </div>
+                                <div class="toolkit-card" title="Banco de Dados">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+                                    <p>MySQL</p>
+                                    <span class="category">DB</span>
+                                </div>
+                                <div class="toolkit-card" title="Backend">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
+                                    <p>Firebase</p>
+                                    <span class="category">Backend</span>
+                                </div>
+                                <div class="toolkit-card" title="UI Component Library">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-plain.svg" alt="Material UI">
+                                    <p>Material UI</p>
+                                    <span class="category">UI/CSS</span>
+                                </div>
+                                <div class="toolkit-card" title="Utility-First CSS">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="Tailwind CSS">
+                                    <p>Tailwind CSS</p>
+                                    <span class="category">UI/CSS</span>
+                                </div>
+                                <div class="toolkit-card" title="CSS-in-JS (Styled Components)">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/styledcomponents/styledcomponents-original.svg" alt="Styled Components">
+                                    <p>Styled Cmp</p>
+                                    <span class="category">CSS-in-JS</span>
+                                </div>
+                                <div class="toolkit-card" title="Design UI/UX">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+                                    <p>Figma</p>
+                                    <span class="category">Design</span>
+                                </div>
+                                <div class="toolkit-card" title="Edição de Imagem">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" alt="Photoshop">
+                                    <p>Photoshop</p>
+                                    <span class="category">Design</span>
+                                </div>
+                                <div class="toolkit-card" title="Design Gráfico/Social Media">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" alt="Canva">
+                                    <p>Canva</p>
+                                    <span class="category">Design/Mkt</span>
+                                </div>
+                                <div class="toolkit-card" title="Controle de Versão (Local)">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                                    <p>Git</p>
+                                    <span class="category">Versão</span>
+                                </div>
+                                <div class="toolkit-card" title="Controle de Versão (Remoto)">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+                                    <p>GitHub</p>
+                                    <span class="category">Versão</span>
+                                </div>
+                                <div class="toolkit-card" title="Metodologia">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Metodologias Ágeis">
+                                    <p>Metodologias Ágeis</p>
+                                    <span class="category">Metodologia</span>
+                                </div>
+                                <div class="toolkit-card" title="Metodologia">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-plain.svg" alt="Scrum">
+                                    <p>Scrum</p>
+                                    <span class="category">Metodologia</span>
+                                </div>
+                                <div class="toolkit-card" title="Metodologia">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg" alt="Kanban">
+                                    <p>Kanban</p>
+                                    <span class="category">Metodologia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section animated-row" data-section="slide07" id="slide07">
+                <div class="section-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 wide-col-laptop">
+                            <div class="title-block animate" data-animate="fadeInUp">
+                                <span>Minhas Competências</span>
+                                <h2>Habilidades Comportamentais</h2>
+                                <p>Além da técnica, acredito que a colaboração, a comunicação e a adaptabilidade são essenciais para o sucesso em projetos de desenvolvimento.</p>
+                            </div>
+                            <div class="skills-row animate" data-animate="fadeInDown">
+                                <ul class="soft-skills-list">
+                                    <li><i class="fa fa-heart-o"></i>Inteligência Emocional e Relacionamento Interpessoal</li>
+                                    <li><i class="fa fa-rocket"></i>Proatividade e Autonomia (Iniciativa com pouca supervisão)</li>
+                                    <li><i class="fa fa-lightbulb-o"></i>Criatividade, Inovação e Pensamento Crítico</li>
+                                    <li><i class="fa fa-comments-o"></i>Comunicação e Negociação (Feedback Construtivo)</li>
+                                    <li><i class="fa fa-users"></i>Liderança e Habilidades de Gestão (Foco em Resultados)</li>
+                                    <li><i class="fa fa-puzzle-piece"></i>Capacidade de Resolução de Problemas Complexos</li>
+                                    <li><i class="fa fa-refresh"></i>Persistência e Adaptabilidade a Mudanças</li>
+                                    <li><i class="fa fa-search"></i>Perfil Analítico e Detalhista para Avaliar Softwares</li>
+                                    <li><i class="fa fa-clock-o"></i>Boa Gestão de Tempo e Performance com Prazos</li>
+                                    <li><i class="fa fa-line-chart"></i>Visão Estratégica (Branding, Marketing Digital, Consultoria)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animated-row" data-section="slide08" id="slide08">
+                <div class="section-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 wide-col-laptop">
+                            <div class="title-block animate" data-animate="fadeInUp">
+                                <span>Minha Trajetória</span>
+                                <h2>Experiência Profissional</h2>
+                                <p class="carousel-hint">← Arraste ou use as setas para ver a linha do tempo completa →</p>
+                            </div>
+                            <div class="services-section">
+                                <div class="services-list owl-carousel">
+                                    
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <h3>Desenvolvedor Freelancer & Consultor</h3>
+                                            <p><strong>Autônomo / Remoto | 2022 - Presente</strong></p>
+                                            <ul class="list-unstyled">
+                                                <li>- Liderança em projetos de desenvolvimento digital e consultoria (branding).</li>
+                                                <li>- Dev. Web (Score Positivo): Interfaces, integração de APIs e testes (PHP, Laravel, PostgreSQL).</li>
+                                                <li>- Entrega de projetos completos (sites, catálogos, landing pages).</li>
+                                                <li>- Sistema de gerenciamento de OS (Eletrosat - EnerLed Piraju).</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <h3>Mobile Developer</h3>
+                                            <p><strong>HND LABS | São Paulo-SP | 2020 – 2022</strong></p>
+                                            <ul class="list-unstyled">
+                                                <li>- Dev. e manutenção do app VO MOBILE (Grupo Hinode), com +110.000 downloads.</li>
+                                                <li>- Atuação na internacionalização do sistema (América do Sul).</li>
+                                                <li>- Aplicação de arquiteturas MVC/MVVM e integração de APIs REST (Retrofit).</li>
+                                                <li>- Correção de incidentes (bug fixing), depuração e testes.</li>
+                                                <li>- Tecnologias: Kotlin, Java, Android SDK, Room, Firebase.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <h3>Programador 1</h3>
+                                            <p><strong>Kplay - Fábrica de Software | Piraju-SP | 2019 - 2020</strong></p>
+                                            <ul class="list-unstyled">
+                                                <li>- Sustentação de sistemas corporativos (ICORP - Grupo Hinode).</li>
+                                                <li>- Manutenção de código legado.</li>
+                                                <li>- Desenvolvimento e correção de funcionalidades em ASP, PHP e Java (Android).</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <h3>Professor Universitário (Estágio)</h3>
+                                            <p><strong>PIBID Bandeirantes | 2016 – 2018</strong></p>
+                                            <ul class="list-unstyled">
+                                                <li>- Participação no Programa Institucional de Bolsa de Iniciação à Docência (PIBID) durante a graduação.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="service-box price-box">
+                                            <h3>Projeto de Extensão (IDNORP)</h3>
+                                            <p><strong>PROEXT - UENP | 2014</strong></p>
+                                            <ul class="list-unstyled">
+                                                <li>- Projeto para promover a inclusão digital no Norte do Paraná através de cursos, palestras e atividades sociais.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="text-center animate" data-animate="fadeInUp" style="margin-top: 30px;">
+                                <a href="curriculoporftolio.html" target="_blank" class="btn detailed-cv">Ver Currículo Detalhado</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animated-row" data-section="slide09" id="slide09">
+                <div class="section-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 wide-col-laptop">
+                            <div class="title-block animate" data-animate="fadeInUp">
+                                <span>Minha Base de Conhecimento</span>
+                                <h2>Formação e Cursos</h2>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-5 col-md-6 mb-4 animate" data-animate="fadeInUp">
+                                    <div class="service-box price-box">
+                                        <h3><i class="fa fa-graduation-cap" style="width: 25px; text-align: center;"></i> Formação Acadêmica</h3>
+                                        <ul class="list-unstyled mt-4">
+                                            <li class="mb-3">
+                                                <strong>Sistemas de Informação</strong><br>
+                                                <small>Universidade Estadual do Norte do Paraná (UENP) | 2012 – 2018</small>
+                                            </li>
+                                            <li>
+                                                <strong>Técnico em Informática</strong><br>
+                                                <small>Etec, Piraju | 2009 – 2010</small>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-6 mb-4 animate" data-animate="fadeInUp">
+                                    <div class="service-box price-box">
+                                        <h3><i class="fa fa-certificate" style="width: 25px; text-align: center;"></i> Certificações Técnicas</h3>
+                                         <ul class="list-unstyled mt-4" style="font-size: 14px;">
+                                            <li class="mb-2"><i class="fa fa-android" style="width: 20px; text-align: center; margin-right: 5px;"></i> Kotlin para Android Completo</li>
+                                            <li class="mb-2"><i class="fa fa-android" style="width: 20px; text-align: center; margin-right: 5px;"></i> Kotlin JETPACK COMPOSE</li>
+                                            <li class="mb-2"><i class="fa fa-code" style="width: 20px; text-align: center; margin-right: 5px;"></i> Desenvolvedor Web Completo</li>
+                                            <li class="mb-2"><i class="fa fa-tasks" style="width: 20px; text-align: center; margin-right: 5px;"></i> Planejamento e Gestão de Projetos</li>
+                                            <li><i class="fa fa-lightbulb-o" style="width: 20px; text-align: center; margin-right: 5px;"></i> UX Design de A a Z</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animated-row" data-section="slide10" id="slide10">
+                <div class="section-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 wide-col-laptop">
+                            <div class="title-block animate" data-animate="fadeInUp">
+                                <span>Projetos em Destaque</span>
+                                <h2>Trabalho em Ação</h2>
+                                <p class="carousel-hint">← Arraste ou use as setas para explorar mais projetos →</p>
+                            </div>
+                            <div class="gallery-section">
+                                <div class="gallery-list owl-carousel">
+                                    
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="images/mockup/hinode.jpg" alt="Mockup do aplicativo VO Mobile do Grupo Hinode">
+                                            </div>
+                                            <div class="thumb-inner animate" data-animate="fadeInUp">
+                                                <h4>VO Mobile (Grupo Hinode)</h4>
+                                                <p>Desenvolvimento Nativo e Manutenção Mobile</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="images/mockup/score.jpg" alt="Mockup da plataforma web Score Positivo">
+                                            </div>
+                                            <div class="thumb-inner animate" data-animate="fadeInUp">
+                                                 <h4>Plataforma Score Positivo</h4>
+                                                 <p>Desenvolvimento e Arquitetura Web Full Stack</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="images/mockup/gabriel.jpg" alt="Mockup da identidade visual e site Gabriel Imports">
+                                            </div>
+                                            <div class="thumb-inner animate" data-animate="fadeInUp">
+                                                 <h4>E-commerce Gabriel Imports</h4>
+                                                 <p>Desenvolvimento Web e Estratégia de Marca</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="images/mockup/titos.jpg" alt="Mockup do Cardápio Digital Tito's Dogueria">
+                                            </div>
+                                            <div class="thumb-inner animate" data-animate="fadeInUp">
+                                                 <h4>Cardápio Digital Tito's Dogueria</h4>
+                                                 <p>Design Estratégico e Desenvolvimento Web</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="images/mockup/omaha.jpg" alt="Mockup do site Omaha Tattoo Art">
+                                            </div>
+                                            <div class="thumb-inner animate" data-animate="fadeInUp">
+                                                 <h4>Site Institucional Omaha Art</h4>
+                                                 <p>Branding, Design e Desenvolvimento Web</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="item animate" data-animate="fadeInUp">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="images/" alt="Imagem do projeto de portfólio">
+                                            </div>
+                                            <div class="thumb-inner animate" data-animate="fadeInUp">
+                                                 <h4>Konoha Tech Studio (Portfólio)</h4>
+                                                 <p>UI/UX Design e Prototipação (Front-End)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section animated-row" data-section="slide12" id="slide12">
+                <div class="section-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-md-7 wide-col-laptop">
+                            <div class="title-block animate" data-animate="fadeInUp">
+                                <span>Contato</span>
+                                <h2>Vamos Conversar?</h2>
+                                <p>Aberto a novas oportunidades como Desenvolvedor Full Stack ou Android. Vamos conversar sobre como posso contribuir com seus projetos e equipes de desenvolvimento.</p>
+                            </div>
+                            <div class="contact-section">
+                                <div class="row">
+                                    <div class="col-md-6 animate" data-animate="fadeInUp">
+                                        <div class="contact-box">
+                                            <div class="contact-row">
+                                                <i class="fa fa-envelope"></i> <a href="mailto:claudiosantana.devloper@gmail.com">claudiosantana.devloper@gmail.com</a>
+                                            </div>
+                                            <div class="contact-row">
+                                                <i class="fa fa-whatsapp"></i> <a href="https://wa.me/5514996373527" target="_blank">(14) 99637-3527</a>
+                                            </div>
+                                            <div class="contact-row">
+                                                <i class="fa fa-linkedin"></i> <a href="https://www.linkedin.com/in/claudio-santana-silva-junior-a8aa76147/" target="_blank">LinkedIn</a>
+                                            </div>
+                                            <div class="contact-row">
+                                                <i class="fa fa-github"></i> <a href="https://github.com/konohaclaudio" target="_blank">GitHub</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 animate" data-animate="fadeInUp">
+                                        <form id="ajax-contact" method="post" action="https://formspree.io/f/SUA_CHAVE_FORMSPREE">
+                                            <div class="input-field">
+                                                <input type="text" class="form-control" name="name" id="name" required placeholder="Seu Nome">
+                                            </div>
+                                            <div class="input-field">
+                                                <input type="email" class="form-control" name="_replyto" id="email" required placeholder="Seu E-mail">
+                                            </div>
+                                            <div class="input-field">
+                                                <textarea class="form-control" name="message" id="message" required placeholder="Sua Mensagem"></textarea>
+                                            </div>
+                                            <button class="btn" type="submit">Enviar Contato</button>
+                                        </form>
+                                        <div id="form-messages" class="mt-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="footer-text animate" data-animate="fadeInUp" style="text-align: center; padding-top: 40px; margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); width: 100%;">
+                                <p style="font-size: 12px; color: rgba(255, 255, 255, 0.6); margin: 0; line-height: 1.6;">
+                                    2025 Claudio Santana. Todos os direitos reservados.<br>
+                                    Desenvolvido por Konoha Tech Studio © - Soluções Tecnológicas Criativas
+                                </p>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="social-icons">
+            <div class="text-right">
+                <ul class="social-icons">
+                    <li><a href="https://www.linkedin.com/in/claudio-santana-silva-junior-a8aa76147/" target="_blank" title="LinkedIn" aria-label="LinkedIn Profile"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="https://github.com/konohaclaudio" target="_blank" title="GitHub" aria-label="GitHub Profile"><i class="fa fa-github"></i></a></li>
+                    <li><a href="https://wa.me/5514996373527" target="_blank" title="WhatsApp" aria-label="WhatsApp Contact"><i class="fa fa-whatsapp"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>  
+
+    <script src="js/jquery.js"></script> 
+    <script src="js/bootstrap.min.js"></script> 
+    <script src="js/fullpage.min.js"></script> 
+    <script src="js/scrolloverflow.js"></script> 
+    <script src="js/owl.carousel.min.js"></script> 
+    <script src="js/jquery.inview.min.js"></script> 
+    <script src="js/form.js"></script> 
+    <script src="js/custom.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // =========================================================================
+        // SCRIPTS DE BLOQUEIO / DETECÇÃO DE DEVTOOLS (segurança de primeira camada)
+        // =========================================================================
+        const devtoolsOverlay = document.getElementById('devtools-alert-overlay');
+        let isDevToolsOpen = false;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || 
+                (e.ctrlKey && e.key === 'u')) { 
+                e.preventDefault();
+            }
+        });
+
+        function checkDevTools() {
+            const threshold = 160; 
+            const t0 = performance.now();
+            debugger;
+            const t1 = performance.now();
+            
+            if (t1 - t0 > threshold) {
+                if (!isDevToolsOpen) {
+                    if(devtoolsOverlay) {
+                        devtoolsOverlay.style.display = 'flex';
+                    }
+                    isDevToolsOpen = true;
+                }
+            } else if (isDevToolsOpen) {
+                if(devtoolsOverlay) {
+                    devtoolsOverlay.style.display = 'none';
+                }
+                isDevToolsOpen = false;
+            }
+            
+            setTimeout(checkDevTools, 500); 
+        }
+        // Desativado para não atrapalhar o usuário durante o teste
+        // checkDevTools();
+        // =========================================================================
+        // FIM DOS SCRIPTS DE SEGURANÇA
+        // =========================================================================
+
+        // Inicialização do Canvas (Matrix Rain)
+        const canvas = document.getElementById('matrix-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            const welcomeBox = document.querySelector('#slide01 .welcome-box');
+            const welcomeTitle = document.querySelector('#slide01 .welcome-title');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const characters = 'KONOHAKONOHAKONOHAKONOHAKONOHAKONOHAKONOHAKONOHAKONOHAKONOHAKONOHA葉アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン01';
+            const charactersArray = characters.split('');
+            const fontSize = 16;
+            let columns = Math.ceil(canvas.width / fontSize);
+            let drops = [];
+            for (let x = 0; x < columns; x++) { drops[x] = 1; }
+            let matrixInterval;
+            
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.font = fontSize + 'px "Roboto Mono", monospace';
+                for (let i = 0; i < drops.length; i++) {
+                    const isLeaf = Math.random() > 0.9995;
+                    const text = isLeaf ? '葉' : charactersArray[Math.floor(Math.random() * charactersArray.length)];
+                    const x = i * fontSize;
+                    const y = drops[i] * fontSize;
+                    
+                    if (isLeaf) ctx.fillStyle = '#33FF77';
+                    else if (Math.random() > 0.95) ctx.fillStyle = '#00CC44';
+                    else ctx.fillStyle = '#008F23';
+                    
+                    ctx.fillText(text, x, y);
+                    if (y > canvas.height && Math.random() > 0.975) { drops[i] = 0; }
+                    drops[i]++;
+                }
+            }
+            function revealContent() {
+                clearInterval(matrixInterval);
+                let opacity = 0.1;
+                const fadeOut = setInterval(() => {
+                    if (!canvas) return;
+                    ctx.fillStyle = `rgba(0, 0, 0, ${opacity})`;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    opacity += 0.05;
+                    if (opacity >= 1.2) {
+                        clearInterval(fadeOut);
+                        canvas.style.display = 'none';
+                        if (welcomeBox) {
+                            welcomeBox.classList.add('visible');
+                            if (welcomeTitle) {
+                                welcomeTitle.classList.add('glitch-effect');
+                                welcomeTitle.setAttribute('data-text', welcomeTitle.textContent);
+                                setTimeout(() => { welcomeTitle.classList.remove('glitch-effect'); }, 1000);
+                            }
+                            
+                            const originalAnimateList = Array.from(welcomeBox.querySelectorAll('.welcome-text-group > *, p, .btn, .scroll-down'));
+                            const elementsToAnimate = [
+                                welcomeBox.querySelector('.welcome-text-group'), 
+                                ...originalAnimateList 
+                            ].filter(el => el); 
+
+                            elementsToAnimate.forEach((el, index) => {
+                                setTimeout(() => { 
+                                    el.classList.add('visible'); 
+                                }, 400 * index);
+                            });
+                        }
+                    }
+                }, 50);
+            }
+            matrixInterval = setInterval(drawMatrix, 33);
+            setTimeout(revealContent, 4000);
+            window.addEventListener('resize', () => {
+                if (!canvas) return;
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                columns = Math.ceil(canvas.width / fontSize);
+                drops = [];
+                for (let x = 0; x < columns; x++) { drops[x] = 1; }
+            });
+        }
+        
+        // Efeito Hover Scramble
+        const scrambleElements = document.querySelectorAll(".welcome-first, .welcome-title");
+        const scrambleChars = 'ABCDEFGHIJKONOHA⌬KONOHALMNOPQRSTUDIOTECHVWXYZKONOHA△?KONOHA✽*%$#@!&葉' ;
+        scrambleElements.forEach(el => {
+            let intervalId;
+            const originalText = el.dataset.textOriginal;
+            el.addEventListener('mouseenter', () => {
+                let iteration = 0;
+                clearInterval(intervalId);
+                intervalId = setInterval(() => {
+                    el.innerText = originalText.split("").map((letter, index) => {
+                        if(index < iteration) { return originalText[index]; }
+                        return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                    }).join("");
+                    if(iteration >= originalText.length) { clearInterval(intervalId); }
+                    iteration += 1 / 2;
+                }, 30);
+            });
+            el.addEventListener('mouseleave', () => {
+                clearInterval(intervalId);
+                el.innerText = originalText;
+            });
+        });
+
+        // Efeito Logo Toggle (Metamorfose)
+        const textGroup = document.querySelector('.welcome-text-group');
+        const logoImage = document.getElementById('logo-image');
+        let isLogoVisible = false;
+
+        function toggleLogo() {
+            if (!isLogoVisible) {
+                textGroup.classList.add('hidden');
+                logoImage.style.display = 'block';
+                setTimeout(() => logoImage.classList.add('visible'), 10);
+                isLogoVisible = true;
+            } else {
+                logoImage.classList.remove('visible');
+                setTimeout(() => {
+                    logoImage.style.display = 'none';
+                    textGroup.classList.remove('hidden');
+                }, 500);
+                isLogoVisible = false;
+            }
+        }
+
+        textGroup.addEventListener('click', toggleLogo);
+        logoImage.addEventListener('click', toggleLogo);
+
+        // =========================================================================
+        // Cursor Customizado (Glow/Tátil) - Lógica do Glow Específico
+        // =========================================================================
+        const cursorDot = document.createElement('div');
+        cursorDot.classList.add('custom-cursor', 'cursor-dot');
+        const cursorOutline = document.createElement('div');
+        cursorOutline.classList.add('custom-cursor', 'cursor-outline');
+        
+        document.body.appendChild(cursorDot);
+        document.body.appendChild(cursorOutline);
+
+        let cursorX = 0, cursorY = 0;
+        let targetX = 0, targetY = 0;
+        
+        const interactiveSelectors = 'a, button, .pillar, .concept-title, .scroll-down, .social-icons li, .toolkit-card, .owl-nav button';
+        
+        function animateCursor() {
+            cursorX += (targetX - cursorX) * 0.2;
+            cursorY += (targetY - cursorY) * 0.2;
+            cursorOutline.style.transform = `translate(${cursorX - 15}px, ${cursorY - 15}px)`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        function moveCursor(e) {
+            targetX = e.clientX;
+            targetY = e.clientY;
+            cursorDot.style.left = `${targetX}px`;
+            cursorDot.style.top = `${targetY}px`;
+        }
+
+        function hoverCursorEffect(e) {
+            const target = e.target;
+            const isInteractive = target.closest(interactiveSelectors);
+            
+            if (isInteractive) {
+                cursorOutline.style.width = '20px';
+                cursorOutline.style.height = '20px';
+                cursorOutline.style.opacity = '0.7';
+                cursorDot.style.width = '4px';
+                cursorDot.style.height = '4px';
+            } else {
+                cursorOutline.style.width = '30px';
+                cursorOutline.style.height = '30px';
+                cursorOutline.style.opacity = '1';
+                cursorDot.style.width = '6px';
+                cursorDot.style.height = '6px';
+            }
+            cursorOutline.style.backgroundColor = 'transparent';
+            cursorOutline.style.boxShadow = 'none';
+        }
+        
+        document.addEventListener('mousemove', moveCursor);
+        document.addEventListener('mouseover', hoverCursorEffect);
+        document.addEventListener('mouseout', hoverCursorEffect);
+        
+        document.querySelectorAll('.concept-cta, .pillar, .btn').forEach(el => {
+            el.addEventListener('click', () => {
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+            });
+        });
+        
+        // Inicialização do Owl Carousel
+        $('.services-list').owlCarousel({
+            loop: false,
+            margin: 30,
+            nav: true,
+            dots: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                },
+                1400: {
+                    items: 4
+                }
+            },
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
+        });
+        
+        $('.gallery-list').owlCarousel({
+            loop: false,
+            margin: 30,
+            nav: true,
+            dots: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            },
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
+        });
+
+    });
+    </script>
+</body>
+</html>

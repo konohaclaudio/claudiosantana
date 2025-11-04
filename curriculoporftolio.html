@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Claudio Santana</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" xintegrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* * =============================================
+         * VARIÁVEIS DE COR (TEMA CLARO PROFISSIONAL)
+         * =============================================
+        */
+        :root {
+            --bg-main: #FFFFFFff;
+            --bg-card: #FFFFFFff;
+            --bg-tag: #457D47ff;
+            --text-body: #1F2937ff;      
+            --text-headings: #273C2Eff; 
+            --text-secondary: #457D47ff;
+            --text-on-tag: #FFFFFFff;
+            --text-on-hover: #1F2937ff; /* Cor do texto geral no hover do card */
+            --accent-primary: #457D47ff;
+            --accent-glow: #457D47ff;    
+            --border-color: #D5E2D3ff;
+            --border-hover: #273C2Eff;
+            --grid-color: rgba(69, 125, 71, 0.05); 
+        }
+
+        /* * =============================================
+         * ESTILOS GLOBAIS (BODY)
+         * =============================================
+        */
+        html {
+             scroll-behavior: smooth; /* Rolagem suave para links âncora */
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-body); 
+            overflow-x: hidden;
+            overflow-y: auto;
+            --grid-size: 50px;
+            background-color: var(--bg-main);
+            background-image: 
+                repeating-linear-gradient(to right, var(--grid-color) 0, var(--grid-color) 1px, transparent 1px, transparent var(--grid-size)),
+                repeating-linear-gradient(to bottom, var(--grid-color) 0, var(--grid-color) 1px, transparent 1px, transparent var(--grid-size));
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-headings);
+        }
+
+        .glow-text { 
+            color: var(--accent-glow);
+        }
+        
+        /* * =============================================
+         * ESTILO DOS CARDS (TEMA CLARO)
+         * =============================================
+        */
+        .sci-fi-card { 
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem; /* 8px */
+            box-shadow: 0 4px 12px rgba(39, 60, 46, 0.05);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            position: relative; 
+            overflow: hidden; 
+            height: 100%; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+        .sci-fi-card:hover { 
+            border-color: var(--border-hover);
+            transform: translateY(-8px) scale(1.02); 
+            box-shadow: 0 10px 20px rgba(39, 60, 46, 0.1);
+        }
+
+        /* Corrigindo herança de cor no hover */
+        .sci-fi-card:hover .card-desc,
+        .sci-fi-card:hover p, 
+        .sci-fi-card:hover h3,
+        .sci-fi-card:hover h4,
+        .sci-fi-card:hover h5, 
+        .sci-fi-card:hover div,
+        .sci-fi-card:hover span:not(.tag-skill), 
+        .sci-fi-card:hover ul,
+        .sci-fi-card:hover li {
+            color: var(--text-on-hover) !important;
+        }
+        .sci-fi-card:hover .tech-icon,
+        .sci-fi-card:hover .service-icon { 
+             color: var(--text-on-hover) !important;
+        }
+        .sci-fi-card:hover .tag-skill {
+            background-color: var(--text-on-hover) !important; 
+            color: #ffffff !important; 
+        }
+        .sci-fi-card:hover .timeline-dot {
+            border-color: var(--text-on-hover) !important;
+        }
+
+        /* * =============================================
+         * ESTILOS AUXILIARES E NOVOS ELEMENTOS (UX)
+         * =============================================
+        */
+        
+        /* Navegação */
+        #mobile-menu {
+            display: none; 
+            position: absolute;
+            top: 4rem; 
+            right: 1rem;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            padding: 1rem;
+            z-index: 50; 
+        }
+         #mobile-menu a {
+             display: block;
+             padding: 0.5rem 0;
+             color: var(--text-headings);
+             font-weight: 500;
+             transition: color 0.2s;
+         }
+         #mobile-menu a:hover {
+             color: var(--accent-primary);
+         }
+        .nav-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: var(--text-headings);
+        }
+
+        /* Links gerais */
+        .link-style {
+            color: var(--accent-primary);
+            transition-property: color;
+            transition-duration: 200ms;
+            font-weight: 500;
+        }
+        .link-style:hover {
+            color: var(--text-headings); 
+        }
+
+        /* Títulos e Subtítulos de Seção */
+        .section-title {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* semibold */
+            color: var(--text-headings); 
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+        .section-subtitle {
+            font-size: 1rem; /* text-base */
+            font-weight: 500;
+            color: var(--accent-glow); 
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+
+        /* Ícones de Tecnologia */
+        .tech-icon {
+            width: 3rem; 
+            height: 3rem; 
+            margin-bottom: 0.75rem; 
+            transition: color 300ms;
+            color: var(--text-secondary); /* Cor inicial */
+        }
+        @media (min-width: 640px) {
+            .tech-icon {
+                width: 3.5rem; 
+                height: 3.5rem; 
+            }
+        }
+         /* Nome da tecnologia abaixo do ícone */
+         .tech-name {
+            color: var(--text-secondary); /* Cor inicial */
+            transition: color 300ms;
+        }
+
+        /* Ícones de Contato e Sociais (Rodapé) */
+        .contact-icon, .social-icon {
+            width: 1.25rem; 
+            height: 1.25rem; 
+            margin-right: 0.5rem; 
+            color: var(--text-secondary); 
+            transition: color 0.2s;
+        }
+         .social-link:hover .social-icon {
+             color: var(--text-headings); /* Escurece ícone social no hover */
+         }
+
+
+        /* Subtítulos dentro dos cards de Serviço */
+        .service-card-subtitle {
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 600; /* semibold */
+            color: var(--text-headings);
+            margin-top: 1rem; /* mt-4 */
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+
+        /* Ícones Font Awesome para Pilares/Serviços */
+        .service-icon {
+            color: var(--text-secondary);
+            margin-right: 0.5rem;
+            width: 1.1em; 
+            display: inline-block;
+            text-align: center;
+            transition: color 0.3s; /* Adicionado para hover do card */
+        }
+
+        /* Botão Call-to-Action (CTA) */
+         .cta-button {
+             display: inline-block;
+             background-color: var(--accent-primary);
+             color: white !important; /* Força cor branca */
+             padding: 0.75rem 1.5rem;
+             border-radius: 0.375rem; /* rounded-md */
+             font-weight: 600;
+             transition: background-color 0.3s, transform 0.2s;
+             text-decoration: none; 
+             border: none; 
+         }
+         .cta-button:hover {
+             background-color: var(--text-headings); 
+             transform: translateY(-2px);
+             color: white !important; 
+         }
+         /* Tags de Habilidades Comportamentais */
+         .tag-skill {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* INÍCIO DA NOVA ESTÉTICA (MODO CLARO) */
+        .toolkit-section, .soft-skills-section { 
+            padding: 40px 0px; 
+            border-radius: 0.5rem;
+        }
+        /* Ajuste de cor do título para o fundo claro */
+        .toolkit-section .title-block span, .soft-skills-section .title-block span, #servicos .title-block span, #portfolio .title-block span {
+            color: var(--accent-primary);
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+         .toolkit-section .title-block h2, .soft-skills-section .title-block h2, #servicos .title-block h2, #portfolio .title-block h2 {
+             color: var(--text-headings); 
+             font-size: 1.875rem; /* text-3xl */
+             font-weight: 700; /* bold */
+             margin-top: 0.5rem;
+             margin-bottom: 0.5rem;
+         }
+         .toolkit-section .title-block p, .soft-skills-section .title-block p, #servicos .title-block p, #portfolio .title-block p {
+             color: var(--text-body); 
+             font-size: 1.125rem; /* text-lg */
+             margin-bottom: 2.5rem; /* mb-10 */
+         }
+         /* Centralizar o bloco de título */
+         .title-block {
+             text-align: center;
+             max-width: 800px;
+             margin-left: auto;
+             margin-right: auto;
+         }
+
+        .toolkit-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+            gap: 20px; 
+            justify-items: center; 
+            max-width: 1000px; 
+            margin: 0 auto; 
+        }
+        .toolkit-card {
+            background-color: var(--bg-card); 
+            border: 1px solid var(--border-color); 
+            padding: 15px;
+            border-radius: 10px;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(39, 60, 46, 0.05); 
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        .toolkit-card:hover {
+            transform: scale(1.08);
+            border-color: var(--border-hover); 
+            box-shadow: 0 10px 20px rgba(39, 60, 46, 0.1); 
+        }
+        .toolkit-card img { 
+            height: 40px; 
+            margin-bottom: 5px; 
+            filter: grayscale(100%); 
+            transition: filter 0.5s; 
+        }
+        .toolkit-card:hover img { 
+            filter: grayscale(0%); 
+        }
+         .toolkit-card p { 
+            color: var(--text-secondary); 
+            font-size: 13px; 
+            font-weight: 600; 
+            text-align: center; 
+            margin: 0; 
+        }
+        .toolkit-card span.category {
+            position: absolute;
+            bottom: -15px;
+            font-size: 9px;
+            color: var(--accent-primary); 
+            text-transform: uppercase;
+            font-weight: bold;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        .toolkit-card:hover span.category { opacity: 1; bottom: 5px; }
+        
+        /* Estilos para Habilidades Comportamentais (slide07) */
+        .soft-skills-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .soft-skills-list li {
+            background-color: var(--bg-card); 
+            color: var(--text-body); 
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent-primary);
+            border: 1px solid var(--border-color); 
+        }
+         .soft-skills-list li:hover {
+             color: var(--text-on-hover); 
+             transform: translateX(10px);
+             box-shadow: 0 4px 12px rgba(39, 60, 46, 0.1); 
+             border-color: var(--border-hover);
+         }
+        .soft-skills-list li i {
+            margin-right: 1rem;
+            color: var(--accent-primary);
+            width: 20px;
+            text-align: center;
+        }
+
+        /* FIM DA NOVA ESTÉTICA */
+        
+        /* LAYOUT DE SERVIÇOS (CARD GRID) */
+        .service-card-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+             gap: 1.5rem;
+        }
+       
+    </style>
+</head>
+<body class="min-h-screen p-4 py-8 sm:p-12">
+
+    <svg width="0" height="0" class="absolute">
+        <defs>
+             <symbol id="icon-email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </symbol>
+            <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </symbol>
+            <symbol id="icon-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+            </symbol>
+            <symbol id="icon-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </symbol>
+            <symbol id="icon-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="max-w-7xl mx-auto space-y-20 sm:space-y-28">
+        
+        <header class="flex justify-between items-center relative">
+            <a href="#inicio" class="text-xl font-bold glow-text">Claudio Santana</a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#sobre" class="nav-link">Sobre</a>
+                <a href="#habilidades" class="nav-link">Habilidades</a>
+                <a href="#experiencia" class="nav-link">Experiência</a>
+                <a href="#servicos" class="nav-link">Competências</a>
+                <a href="#portfolio" class="nav-link">Projetos</a>
+                <a href="#contato" class="nav-link">Contato</a>
+            </nav>
+            <button id="menu-button" class="md:hidden transition-colors" style="color: var(--text-secondary)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+             <div id="mobile-menu">
+                 <a href="#sobre">Sobre</a> <a href="#habilidades">Habilidades</a> <a href="#experiencia">Experiência</a> <a href="#servicos">Competências</a> <a href="#portfolio">Projetos</a> <a href="#contato">Contato</a> <a href="#formacao">Formação</a>
+             </div>
+        </header>
+
+        <main class="space-y-20 sm:space-y-28">
+
+            <section id="inicio" class="text-center pt-16"> 
+                <h2 class="text-4xl sm:text-5xl font-bold mb-3">Claudio Santana</h2>
+                <p class="text-xl sm:text-2xl glow-text font-medium mb-6">
+                    Analista de Sistemas | Desenvolvedor Full Stack | Android Devloper
+                </p>
+                <div id="contato" class="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm pt-4 scroll-mt-20"> 
+                    <a href="mailto:claudiosantana.devloper@gmail.com" class="flex items-center link-style">
+                        <svg class="contact-icon"><use href="#icon-email"></use></svg>claudiosantana.devloper@gmail.com
+                    </a>
+                    <a href="https://wa.me/5514996373527" target="_blank" rel="noopener noreferrer" class="flex items-center link-style social-link">
+                        <svg class="contact-icon"><use href="#icon-phone"></use></svg>+55 (14) 99637-3527
+                    </a>
+                    <a href="https://www.linkedin.com/in/claudio-santana-silva-junior-a8aa76147" target="_blank" rel="noopener noreferrer" class="flex items-center link-style social-link">
+                        <svg class="social-icon"><use href="#icon-linkedin"></use></svg>LinkedIn
+                    </a>
+                    <a href="https://github.com/konohaclaudio" target="_blank" rel="noopener noreferrer" class="flex items-center link-style social-link">
+                        <svg class="social-icon"><use href="#icon-github"></use></svg>GitHub
+                    </a>
+                </div>
+            </section>
+
+            <section id="sobre" class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start scroll-mt-20"> 
+                <div class="lg:col-span-1">
+                    <h3 class="section-title">Sobre Mim</h3>
+                    <p class="section-subtitle">Minha trajetória e foco.</p>
+                    
+                    <img src="perfil.jpg" 
+                         alt="Foto de perfil de Claudio Santana" 
+                         class="rounded-lg w-full max-w-[300px] mx-auto lg:mx-0 mt-6 shadow-md"
+                         style="border: 1px solid var(--border-color);">
+                    
+                </div>
+                <div class="lg:col-span-2 space-y-4 text-base leading-relaxed">
+                    <p>
+                        Atuo como Analista de Sistemas e Desenvolvedor Mobile Nativo (Kotlin/Java), sempre com uma mentalidade Full Stack. Minha paixão é construir produtos digitais robustos, participando de todo o ciclo, desde a concepção da API até a interface final no aplicativo.
+                    </p>
+                    <p>
+                        Meu destaque profissional inclui a participação direta no desenvolvimento e na internacionalização do aplicativo VO MOBILE (Grupo Hinode). Esta plataforma de alto volume ultrapassou a marca de 110.000 downloads, demonstrando minha capacidade de atuar em projetos de grande escala.
+                    </p>
+                    <p>
+                        Com experiência prática no ciclo de vida completo do software, incluindo Back-end (PHP/Laravel, PostgreSQL) e Front-end (React/Node.js em aprimoramento), busco uma oportunidade desafiadora para unir minhas habilidades mobile e web na criação de soluções inovadoras.
+                    </p>
+                     <p class="mt-6">
+                         <a href="mailto:claudiosantana.devloper@gmail.com" class="cta-button">Entre em Contato</a>
+                     </p>
+                </div>
+            </section>
+            
+            <section id="habilidades" class="toolkit-section scroll-mt-20"> 
+                <div class="section-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-md-11 wide-col-laptop">
+                            
+                            <div class="title-block">
+                                <span>Meu Arsenal</span>
+                                <h2>Meu Toolkit Detalhado</h2>
+                                <p>As ferramentas e tecnologias que impulsionam meu desenvolvimento.</p>
+                            </div>
+                            
+                            <div class="toolkit-grid">
+                                <div class="toolkit-card" title="Linguagens">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
+                                    <p>Kotlin</p>
+                                    <span class="category">Linguagens</span>
+                                </div>
+                                <div class="toolkit-card" title="Linguagens">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                                    <p>Java</p>
+                                    <span class="category">Linguagens</span>
+                                </div>
+                                <div class="toolkit-card" title="Linguagens Frontend">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                                    <p>JavaScript</p>
+                                    <span class="category">Linguagens</span>
+                                </div>
+                                <div class="toolkit-card" title="Linguagens">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
+                                    <p>PHP</p>
+                                    <span class="category">Linguagens</span>
+                                </div>
+                                
+                                <div class="toolkit-card" title="Frameworks">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" alt="Laravel">
+                                    <p>Laravel</p>
+                                    <span class="category">Frameworks</span>
+                                </div>
+                                <div class="toolkit-card" title="Mobile">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" alt="Android SDK">
+                                    <p>Android SDK</p>
+                                    <span class="category">Mobile</span>
+                                </div>
+                                <div class="toolkit-card" title="Mobile">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jetpackcompose/jetpackcompose-original.svg" alt="Jetpack Compose" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-plain.svg'">
+                                    <p>Jetpack Compose</p>
+                                    <span class="category">Mobile</span>
+                                </div>
+                                
+                                <div class="toolkit-card" title="Banco de Dados">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+                                    <p>PostgreSQL</p>
+                                    <span class="category">DB</span>
+                                </div>
+                                <div class="toolkit-card" title="Banco de Dados">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+                                    <p>MySQL</p>
+                                    <span class="category">DB</span>
+                                </div>
+                                <div class="toolkit-card" title="Backend">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase">
+                                    <p>Firebase</p>
+                                    <span class="category">Backend</span>
+                                </div>
+                                
+                                <div class="toolkit-card" title="Frontend/Estilização">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+                                    <p>CSS3</p>
+                                    <span class="category">Frontend</span>
+                                </div>
+                                <div class="toolkit-card" title="Utility-First CSS">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="Tailwind CSS">
+                                    <p>Tailwind CSS</p>
+                                    <span class="category">UI/CSS</span>
+                                </div>
+                                <div class="toolkit-card" title="UI Component Library">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-plain.svg" alt="Material UI">
+                                    <p>Material UI</p>
+                                    <span class="category">UI/CSS</span>
+                                </div>
+                                <div class="toolkit-card" title="CSS-in-JS (Styled Components)">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/styledcomponents/styledcomponents-original.svg" alt="Styled Components">
+                                    <p>Styled Cmp</p>
+                                    <span class="category">CSS-in-JS</span>
+                                </div>
+                                <div class="toolkit-card" title="Design UI/UX">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+                                    <p>Figma</p>
+                                    <span class="category">Design</span>
+                                </div>
+                                <div class="toolkit-card" title="Edição de Imagem">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" alt="Photoshop">
+                                    <p>Photoshop</p>
+                                    <span class="category">Design</span>
+                                </div>
+                                <div class="toolkit-card" title="Design Gráfico/Social Media">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" alt="Canva">
+                                    <p>Canva</p>
+                                    <span class="category">Design/Mkt</span>
+                                </div>
+                                
+                                <div class="toolkit-card" title="Controle de Versão (Local)">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                                    <p>Git</p>
+                                    <span class="category">Versão</span>
+                                </div>
+                                <div class="toolkit-card" title="Controle de Versão (Remoto)">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+                                    <p>GitHub</p>
+                                    <span class="category">Versão</span>
+                                </div>
+                                <div class="toolkit-card" title="Metodologia">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Metodologias Ágeis">
+                                    <p>Metodologias Ágeis</p>
+                                    <span class="category">Metodologia</span>
+                                </div>
+                                <div class="toolkit-card" title="Metodologia">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-plain.svg" alt="Scrum">
+                                    <p>Scrum</p>
+                                    <span class="category">Metodologia</span>
+                                </div>
+                                <div class="toolkit-card" title="Metodologia">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg" alt="Kanban">
+                                    <p>Kanban</p>
+                                    <span class="category">Metodologia</span>
+                                </div>
+
+                                <div class="toolkit-card" title="Frameworks Frontend (Estudando)">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                                    <p>React (Aprimorando)</p>
+                                    <span class="category">Estudando</span>
+                                </div>
+                                <div class="toolkit-card" title="Backend/Runtime (Estudando)">
+                                    <img src="https:cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                                    <p>Node.js (Aprimorando)</p>
+                                    <span class="category">Estudando</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experiencia" class="scroll-mt-20"> 
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-1">
+                        <h3 class="section-title">Experiência</h3>
+                        <p class="section-subtitle">Minha trajetória profissional.</p>
+                    </div>
+                    <div class="lg:col-span-2 space-y-10">
+                        <div class="relative pl-8 border-l-2" style="border-color: var(--border-color)">
+                             <span class="timeline-dot absolute -left-3 top-1 w-5 h-5 rounded-full border-4" style="background-color: var(--accent-primary); border-color: var(--bg-main)"></span>
+                            <p class="text-sm mb-1" style="color: var(--text-secondary)">Desde 08/2022</p>
+                            <h4 class="text-lg font-semibold">Freelancer em Soluções Full Stack e Consultoria Digital</h4>
+                            <p class="text-base font-medium mb-3" style="color: var(--text-secondary)">Autônomo / Remoto, Piraju-SP</p>
+                            <ul class="list-disc list-outside pl-5 space-y-2 text-base">
+                                <li>Liderança em projetos de desenvolvimento digital e consultoria, focando em soluções web e branding.</li>
+                                <li>Experiência em desenvolvimento Web Freelancer (Score Positivo, 08/2022 – 12/2022), incluindo interfaces, integração de APIs e testes (PHP, Laravel, PostgreSQL).</li>
+                                <li>Entrega de projetos completos: sites institucionais (Studio Omaha), catálogos digitais (Gabriel Imports), identidade visual e landing pages (Tito's Dogueria, Via Democrática).</li>
+                                <li>Desenvolvimento de sistema web de gerenciamento de OS (Eletrosat - EnerLed Piraju).</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="relative pl-8 border-l-2" style="border-color: var(--border-color)">
+                            <span class="timeline-dot absolute -left-3 top-1 w-5 h-5 rounded-full border-4" style="background-color: var(--accent-primary); border-color: var(--bg-main)"></span>
+                            <p class="text-sm mb-1" style="color: var(--text-secondary)">01/2020 – 06/2022</p>
+                            <h4 class="text-lg font-semibold">Mobile Developer | HND LABS</h4>
+                            <p class="text-base font-medium mb-3" style="color: var(--text-secondary)">São Paulo-SP</p>
+                            <ul class="list-disc list-outside pl-5 space-y-2 text-base">
+                                <li>Liderança no desenvolvimento de novas funcionalidades e manutenção do aplicativo VO MOBILE (Grupo Hinode), com +110.000 downloads.</li>
+                                <li>Atuação direta na internacionalização do sistema para mercados da América do Sul (Colômbia, Argentina, Paraguai).</li>
+                                <li>Aplicação de arquiteturas MVC/MVVM e integração de APIs REST (Retrofit).</li>
+                                <li>Atuação na correção de incidentes (bug fixing), depuração e testes para garantir a estabilidade da aplicação.</li> <li>Tecnologias: Kotlin, Java, Android SDK/Jetpack, Retrofit, Room, MVVM, Firebase.</li>
+                            </ul>
+                        </div>
+                        
+                         <div class="relative pl-8 border-l-2" style="border-color: var(--border-color)">
+                             <span class="timeline-dot absolute -left-3 top-1 w-5 h-5 rounded-full border-4" style="background-color: var(--accent-primary); border-color: var(--bg-main)"></span>
+                            <p class="text-sm mb-1" style="color: var(--text-secondary)">07/2019 – 01/2020</p>
+                            <h4 class="text-lg font-semibold">Programador 1 | Kplay - Fábrica de Software</h4> <p class="text-base font-medium mb-3" style="color: var(--text-secondary)">Piraju-SP</p>
+                             <ul class="list-disc list-outside pl-5 space-y-2 text-base">
+                                <li>Sustentação de sistemas corporativos (ICORP - Grupo Hinode) e manutenção de código legado.</li> <li>Desenvolvimento e manutenção de funcionalidades utilizando ASP, PHP e Java (Android).</li> </ul>
+                        </div>
+                        
+                        <div class="relative pl-8 border-l-2" style="border-color: var(--border-color)">
+                            <span class="timeline-dot absolute -left-3 top-1 w-5 h-5 rounded-full border-4" style="background-color: var(--accent-primary); border-color: var(--bg-main)"></span>
+                           <p class="text-sm mb-1" style="color: var(--text-secondary)">2016 – 2018</p>
+                           <h4 class="text-lg font-semibold">Professor Universitário de Estágio Supervisionado</h4>
+                           <p class="text-base font-medium mb-3" style="color: var(--text-secondary)">PIBID Bandeirantes</p>
+                            <ul class="list-disc list-outside pl-5 space-y-2 text-base">
+                               <li>Participação no Programa Institucional de Bolsa de Iniciação à Docência (PIBID).</li>
+                           </ul>
+                       </div>
+                       
+                       <div class="relative pl-8 border-l-2" style="border-color: var(--border-color)">
+                            <span class="timeline-dot absolute -left-3 top-1 w-5 h-5 rounded-full border-4" style="background-color: var(--accent-primary); border-color: var(--bg-main)"></span>
+                           <p class="text-sm mb-1" style="color: var(--text-secondary)">jan de 2014 – dez de 2014 (1 ano)</p>
+                           <h4 class="text-lg font-semibold">IDNORP - Inclusão Digital Norte do Paraná</h4>
+                           <p class="text-base font-medium mb-3" style="color: var(--text-secondary)">PROEXT - Programa de Extensão Universitária | Bandeirantes e Região, Brasil</p>
+                           <p class="text-base leading-relaxed">
+                               Projeto de extensão para promover a inclusão digital no Norte do Paraná, através de cursos, palestras e atividades sociais para preparar cidadãos para o mercado de trabalho e realizar pesquisas sobre Informática e Educação.
+                           </p>
+                       </div>
+                       
+                    </div>
+                </div>
+            </section>
+
+            <section id="soft-skills" class="soft-skills-section scroll-mt-20">
+                <div class="section-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 wide-col-laptop">
+                            <div class="title-block">
+                                <span>Minhas Competências</span>
+                                <h2>Habilidades Comportamentais</h2>
+                            </div>
+                            <div class="skills-row">
+                                <ul class="soft-skills-list">
+                                    <li><i class="fas fa-brain"></i>Inteligência Emocional e Relacionamento Interpessoal</li>
+                                    <li><i class="fas fa-bolt"></i>Proatividade e Autonomia (Iniciativa com pouca supervisão)</li>
+                                    <li><i class="fas fa-wand-magic-sparkles"></i>Criatividade, Inovação e Pensamento Crítico</li>
+                                    <li><i class="fas fa-comments"></i>Comunicação e Negociação (Feedback Construtivo)</li>
+                                    <li><i class="fas fa-users-gear"></i>Liderança e Habilidades de Gestão (Foco em Resultados)</li>
+                                    <li><i class="fas fa-puzzle-piece"></i>Capacidade de Resolução de Problemas Complexos</li>
+                                    <li><i class="fas fa-arrows-rotate"></i>Persistência e Adaptabilidade a Mudanças</li>
+                                    <li><i class="fas fa-magnifying-glass"></i>Perfil Analítico e Detalhista para Avaliar Softwares</li>
+                                    <li><i class="fas fa-calendar-check"></i>Boa Gestão de Tempo e Performance com Prazos</li>
+                                    <li><i class="fas fa-bullseye"></i>Visão Estratégica (Branding, Marketing Digital, Consultoria)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="formacao" class="scroll-mt-20"> 
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="sci-fi-card p-6">
+                        <h3 class="text-xl font-bold mb-4">Formação Acadêmica</h3>
+                        <div class="space-y-4 card-desc">
+                            <div>
+                                <h4 class="font-semibold">Sistemas de Informação</h4>
+                                <p class="text-sm" style="color: var(--text-secondary)">Universidade Estadual do Norte do Paraná (UENP)</p>
+                                <p class="text-sm" style="color: var(--text-secondary)">2012 – 2018</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Técnico em Informática</h4>
+                                <p class="text-sm" style="color: var(--text-secondary)">Etec, Piraju</p>
+                                <p class="text-sm" style="color: var(--text-secondary)">2009 – 2010</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sci-fi-card p-6">
+                        <h3 class="text-xl font-bold mb-4">Cursos e Certificações</h3>
+                        <ul class="list-disc list-outside pl-5 space-y-2 text-sm card-desc" style="color: var(--text-secondary)">
+                            <li>Curso completo de Kotlin para Android - Udemy</li>
+                            <li>Curso de Kotlin JETPACK COMPOSE - Udemy</li>
+                            <li>Desenvolvimento de Aplicativos Android - Udemy</li>
+                            <li>Desenvolvedor Web Completo + 10 projetos</li>
+                            <li>Planejamento e Gestão de Projetos - Udemy</li>
+                            <li>Kotlin e Spring do ZERO ao Avançado - Udemy</li>
+                            <li>UX Design de A a Z</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="servicos" class="scroll-mt-20"> 
+                
+                <div class="title-block">
+                    <span>Minhas Especialidades</span>
+                    <h2>Especialidades Técnicas e Competências Core</h2>
+                    <p>
+                        Experiência sólida em todo o ciclo de desenvolvimento, focando em soluções robustas, escaláveis e de alto impacto visual.
+                    </p>
+                </div>
+                
+                <div class="service-card-grid mt-12">
+                    
+                    <div class="sci-fi-card p-6">
+                        <h4 class="text-lg font-semibold mb-2 glow-text"><i class="fas fa-mobile-screen-button service-icon"></i>Desenvolvimento Mobile Nativo</h4>
+                        <p class="text-sm leading-relaxed card-desc" style="color: var(--text-secondary)">
+                            Responsável por escrever códigos, manutenção de códigos e bibliotecas legadas, atender chamados, analisar necessidades de clientes, ajudar a squad em soluções técnicas, sugerir inovações, idealizar arquiteturas, realizar testes, corrigir erros e criar novas soluções.
+                        </p>
+                    </div>
+                    
+                    <div class="sci-fi-card p-6">
+                        <h4 class="text-lg font-semibold mb-2 glow-text"><i class="fas fa-laptop-code service-icon"></i>Desenvolvimento Web Full Stack</h4>
+                         <p class="text-sm leading-relaxed card-desc" style="color: var(--text-secondary)">
+                            Capacidade de atuação completa no Back-end (PHP/Laravel, Node.js, Firebase) e Front-end (React, JavaScript, HTML, CSS), garantindo sistemas e sites coesos e otimizados.
+                        </p>
+                    </div>
+
+                     <div class="sci-fi-card p-6">
+                        <h4 class="text-lg font-semibold mb-2 glow-text"><i class="fas fa-layer-group service-icon"></i>UI/UX e Design de Sistemas</h4>
+                        <p class="text-sm leading-relaxed card-desc" style="color: var(--text-secondary)">
+                            Criação de interfaces intuitivas e funcionais (Figma, Material UI, Tailwind CSS), garantindo a melhor experiência do usuário e aderência às diretrizes de design.
+                        </p>
+                    </div>
+
+                     <div class="sci-fi-card p-6">
+                        <h4 class="text-lg font-semibold mb-2 glow-text"><i class="fas fa-database service-icon"></i>Modelagem e Gestão de Dados</h4>
+                         <p class="text-sm leading-relaxed card-desc" style="color: var(--text-secondary)">
+                            Experiência em bancos de dados relacionais (PostgreSQL, MySQL) e NoSQL (Firebase/Firestore), incluindo modelagem, otimização de consultas e garantia da integridade estrutural.
+                        </p>
+                    </div>
+
+                     <div class="sci-fi-card p-6">
+                        <h4 class="text-lg font-semibold mb-2 glow-text"><i class="fas fa-bolt service-icon"></i>Otimização e Performance</h4>
+                       <p class="text-sm leading-relaxed card-desc" style="color: var(--text-secondary)">
+                            Foco na otimização de código, redução de latência e melhoria contínua dos índices de performance de aplicações web e mobile, garantindo tempos de carregamento rápidos.
+                        </p>
+                    </div>
+
+                    <div class="sci-fi-card p-6">
+                        <h4 class="text-lg font-semibold mb-2 glow-text"><i class="fas fa-stream service-icon"></i>Gestão de Projetos e Versão</h4>
+                        <p class="text-sm leading-relaxed card-desc" style="color: var(--text-secondary)">
+                            Domínio de ferramentas de controle de versão (Git, GitHub) e metodologias ágeis (Scrum, Kanban), assegurando a entrega de projetos dentro do prazo e com qualidade.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+
+             <section id="portfolio" class="scroll-mt-20">
+                 
+                <div class="title-block">
+                    <span>Meu Trabalho</span>
+                    <h2>Projetos em Destaque</h2>
+                    <p>
+                        Uma amostra do meu trabalho, do mobile ao web e design.
+                    </p>
+                </div>
+
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+                     
+                     <div class="sci-fi-card p-6 flex flex-col">
+                         <h4 class="font-semibold mb-2">Portfólio Pessoal (Este Site)</h4>
+                         <p class="text-sm card-desc mb-4" style="color: var(--text-secondary);">
+                            Desenvolvido com HTML5, CSS3, JavaScript (ES6+), jQuery, Bootstrap, FullPage.js, Owl Carousel e animação Matrix (Canvas). Demonstração de domínio Front-end.
+                         </p>
+                         <img 
+                             src="https://placehold.co/600x400/D5E2D3/273C2E?text=Website+UI" 
+                             alt="Projeto Portfólio Pessoal" 
+                             class="mt-4 rounded-md object-cover aspect-video" 
+                             onerror="this.src='https://placehold.co/600x400/eeeeee/cccccc?text=Imagem+Indisponível'"
+                         > 
+                     </div>
+                     
+                     <div class="sci-fi-card p-6 flex flex-col">
+                         <h4 class="font-semibold mb-2">Tito's Dogueria</h4>
+                         <p class="text-sm card-desc mb-4" style="color: var(--text-secondary);">Desenvolvimento de Identidade Visual e implementação de Cardápio Digital Online.</p>
+                         <img 
+                             src="images/mockup/titos.jpg" 
+                             alt="Projeto Tito's Dogueria" 
+                             class="mt-4 rounded-md object-cover aspect-video" 
+                             onerror="this.src='https://placehold.co/600x400/eeeeee/cccccc?text=Imagem+Indisponível'"
+                         > 
+                     </div>
+
+                     
+                     <div class="sci-fi-card p-6 flex flex-col">
+                         <h4 class="font-semibold mb-2">App VO Mobile (Hinode)</h4>
+                         <p class="text-sm card-desc mb-4" style="color: var(--text-secondary);">Desenvolvimento e manutenção de app com +110.000 downloads. Atuação na internacionalização e implementação de novas features (Kotlin, Java).</p>
+                         <img 
+                             src="images/mockup/hinode.jpg" 
+                             alt="Interface de aplicativo mobile" 
+                             class="mt-4 rounded-md object-cover aspect-video" 
+                             onerror="this.src='https://placehold.co/600x400/eeeeee/cccccc?text=Imagem+Indisponível'"
+                         > 
+                     </div>
+
+                     <div class="sci-fi-card p-6 flex flex-col">
+                         <h4 class="font-semibold mb-2">Gabriel Imports</h4>
+                         <p class="text-sm card-desc mb-4" style="color: var(--text-secondary);">Criação de Identidade Visual completa (Manual de Marca) e desenvolvimento de Site com Catálogo Digital.</p>
+                         <img 
+                             src="images/mockup/gabriel.jpg" 
+                             alt="Projeto Gabriel Imports" 
+                             class="mt-4 rounded-md object-cover aspect-video" 
+                             onerror="this.src='https://placehold.co/600x400/eeeeee/cccccc?text=Imagem+Indisponível'"
+                         > 
+                     </div>
+
+                     <div class="sci-fi-card p-6 flex flex-col">
+                         <h4 class="font-semibold mb-2">Omaha Studio</h4>
+                         <p class="text-sm card-desc mb-4" style="color: var(--text-secondary);">Desenvolvimento de Site Institucional com sistema de agendamento online.</p>
+                          <img 
+                             src="images/mockup/omaha.jpg" 
+                             alt="Projeto Studio Omaha" 
+                             class="mt-4 rounded-md object-cover aspect-video" 
+                             onerror="this.src='https://placehold.co/600x400/eeeeee/cccccc?text=Imagem+Indisponível'"
+                         > 
+                     </div>
+                 </div>
+                 <p class="mt-12 text-center" style="color: var(--text-secondary);">
+                     Visite meu <a href="https://github.com/konohaclaudio" target="_blank" rel="noopener noreferrer" class="link-style">GitHub</a> para explorar mais códigos e projetos.
+                 </p>
+             </section>
+
+             <section class="text-center">
+                 <h3 class="text-2xl font-semibold mb-4">Vamos conversar sobre o seu projeto?</h3>
+                 <p class="mb-6" style="color: var(--text-secondary);">Estou à disposição para entender suas necessidades e propor a melhor solução.</p>
+                 <a href="mailto:claudiosantana.devloper@gmail.com" class="cta-button">Enviar um E-mail</a>
+             </section>
+
+        </main>
+         
+        <footer class="mt-20 pt-10 border-t" style="border-color: var(--border-color);">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 px-4">
+                
+                <nav class="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-sm">
+                    <a href="#sobre" class="nav-link">Sobre</a>
+                    <a href="#habilidades" class="nav-link">Habilidades</a>
+                    <a href="#experiencia" class="nav-link">Experiência</a>
+                    <a href="#servicos" class="nav-link">Competências</a>
+                    <a href="#portfolio" class="nav-link">Projetos</a>
+                    <a href="#contato" class="nav-link">Contato</a>
+                </nav>
+
+                 <div class="flex space-x-5">
+                    <a href="https://www.linkedin.com/in/claudio-santana-silva-junior-a8aa76147" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                        <svg class="social-icon w-6 h-6"><use href="#icon-linkedin"></use></svg>
+                    </a>
+                    <a href="https://github.com/konohaclaudio" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+                        <svg class="social-icon w-6 h-6"><use href="#icon-github"></use></svg>
+                    </a>
+                    <a href="mailto:claudiosantana.devloper@gmail.com" class="social-link" aria-label="Email">
+                         <svg class="social-icon w-6 h-6"><use href="#icon-email"></use></svg>
+                    </a>
+                </div>
+            </div>
+
+             <div class="mt-8 pt-6 border-t text-center flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color: var(--border-color);">
+                <p class="text-sm" style="color: var(--text-secondary);">&copy; 2025 Claudio Santana. Todos os direitos reservados.</p>
+                <a href="#inicio" class="flex items-center text-sm link-style">
+                    Voltar ao Topo 
+                    <svg class="w-4 h-4 ml-1"><use href="#icon-arrow-up"></use></svg>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+             // Lógica para Menu Mobile
+             const menuButton = document.getElementById('menu-button');
+             const mobileMenu = document.getElementById('mobile-menu');
+             if (menuButton && mobileMenu) {
+                 menuButton.addEventListener('click', () => {
+                     const isHidden = mobileMenu.style.display === 'none' || mobileMenu.style.display === '';
+                     mobileMenu.style.display = isHidden ? 'block' : 'none';
+                 });
+                 mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => { mobileMenu.style.display = 'none'; });
+                 });
+                 document.addEventListener('click', (event) => {
+                     if (!mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+                         mobileMenu.style.display = 'none';
+                     }
+                 });
+             }
+        });
+    </script>
+
+</body>
+</html>
