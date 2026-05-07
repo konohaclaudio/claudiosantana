@@ -1,49 +1,72 @@
-$(function() {
+/**
+ * Contact Form Handler
+ *
+ * Usa o endpoint AJAX do FormSubmit.co (/ajax/EMAIL) que retorna JSON,
+ * permitindo feedback inline sem redirecionar a página.
+ *
+ * Por que fetch em vez de jQuery.ajax:
+ * - Fetch é nativo, sem dependência extra
+ * - FormSubmit AJAX requer Content-Type: application/json
+ * - jQuery.ajax + serialize() envia form-urlencoded, que o endpoint AJAX
+ *   do FormSubmit não processa corretamente
+ */
+document.addEventListener('DOMContentLoaded', () => {
 
-	// Get the form.
-	var form = $('#ajax-contact');
+    const form     = document.getElementById('ajax-contact');
+    const messages = document.getElementById('form-messages');
 
-	// Get the messages div.
-	var formMessages = $('#form-messages');
+    if (!form || !messages) return;
 
-	// Set up an event listener for the contact form.
-	$(form).submit(function(e) {
-		// Stop the browser from submitting the form.
-		e.preventDefault();
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-		// Serialize the form data.
-		var formData = $(form).serialize();
+        const btn = form.querySelector('[type="submit"]');
 
-		// Submit the form using AJAX.
-		$.ajax({
-			type: 'POST',
-			url: $(form).attr('action'),
-			data: formData
-		})
-		.done(function(response) {
-			// Make sure that the formMessages div has the 'success' class.
-			$(formMessages).removeClass('bg-danger');
-			$(formMessages).addClass('bg-success');
+        // Feedback visual imediato: desabilita o botão para evitar duplo envio
+        btn.disabled    = true;
+        btn.textContent = 'Enviando...';
+        messages.textContent = '';
+        messages.className   = '';
 
-			// Set the message text.
-			$(formMessages).text('Your message successfully sent');
+        // Coleta os campos do formulário
+        const payload = {
+            name:     form.querySelector('[name="name"]').value.trim(),
+            email:    form.querySelector('[name="_replyto"]').value.trim(),
+            message:  form.querySelector('[name="message"]').value.trim(),
+            _subject: 'Novo contato pelo portfólio — Claudio Santana',
+        };
 
-			// Clear the form.
-			$('#name, #email, #message').val('');			
-		})
-		.fail(function(data) {
-			// Make sure that the formMessages div has the 'error' class.
-			$(formMessages).removeClass('bg-success');
-			$(formMessages).addClass('bg-danger');
+        try {
+            const response = await fetch(form.action, {
+                method:  'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept':       'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
 
-			// Set the message text.
-			if (data.responseText !== '') {
-				$(formMessages).text(data.responseText);
-			} else {
-				$(formMessages).text('Oops! An error occured and your message could not be sent.');
-			}
-		});
+            // FormSubmit retorna { success: "true" } em caso de sucesso
+            const json = await response.json();
 
-	});
+            if (json.success === 'true' || json.success === true) {
+                messages.textContent = 'Mensagem enviada! Retornarei em breve.';
+                messages.className   = 'form-success';
+                form.reset();
+            } else {
+                // Resposta inesperada do servidor (não é erro de rede)
+                throw new Error('Resposta inesperada do servidor');
+            }
+
+        } catch {
+            // Cobre erros de rede, timeout e respostas inválidas
+            messages.textContent = 'Não foi possível enviar. Tente pelo WhatsApp ou email direto.';
+            messages.className   = 'form-error';
+        } finally {
+            // Sempre reabilita o botão, independente do resultado
+            btn.disabled    = false;
+            btn.textContent = 'Enviar Contato';
+        }
+    });
 
 });
